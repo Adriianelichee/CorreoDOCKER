@@ -46,4 +46,4 @@ El script `index.php` lo siguiente:
 2. Recupera los correos electrónicos de los usuarios almacenados en la base de datos.
 3. Configura PHPMailer para usar SMTP con MailHog.
 4. Envía un correo electrónico de prueba a cada dirección recuperada de la base de datos.
-5. Muestra un mensaje de confirmación por cada correo enviado.
+5. Muestra un mensaje de confirmación por cada correo enviado y muestra el correo enviado en pantalla.

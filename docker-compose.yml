@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+      - mailhog
+
+  db:
+    build:
+      context: ./db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: correos
+    ports:
+      - "3307:3306"
+    
+  mailhog:
+    build:
+      context: ./mailhog
+    ports:
+      - "8025:8025"

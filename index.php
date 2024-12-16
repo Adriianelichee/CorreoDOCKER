@@ -29,12 +29,24 @@ try {
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $mail->addAddress($row['email']);
+        
+        echo "<h2>Detalles del correo para: " . htmlspecialchars($row['email']) . "</h2>";
+        echo "<p><strong>De:</strong> " . htmlspecialchars($mail->From) . " (" . htmlspecialchars($mail->FromName) . ")</p>";
+        echo "<p><strong>Para:</strong> " . htmlspecialchars($row['email']) . "</p>";
+        echo "<p><strong>Asunto:</strong> " . htmlspecialchars($mail->Subject) . "</p>";
+        echo "<p><strong>Contenido:</strong></p>";
+        echo "<div style='border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;'>";
+        echo $mail->Body;
+        echo "</div>";
+
         $mail->send();
-        echo "Email enviado a " . $row['email'] . "<br>";
+        echo "<p style='color: green;'>Correo enviado exitosamente a " . htmlspecialchars($row['email']) . "</p>";
+        echo "<hr>";
+
         $mail->clearAddresses();
     }
 
-    echo "All emails sent successfully";
+    echo "<h3>Todos los correos han sido enviados y mostrados.</h3>";
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    echo "<p style='color: red;'>No se pudo enviar el mensaje. Error de PHPMailer: {$mail->ErrorInfo}</p>";
 }
